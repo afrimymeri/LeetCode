@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main{
     public static void main(String [] args) {
@@ -83,5 +84,28 @@ class Solutions {
             }
         }
         return sb.toString();
+    }
+    public List<String> letterCombinations(String digits){
+        List<String> result = new ArrayList<>();
+        if (digits == null || digits.length() == 0) {
+            return result;
+        }
+
+        String [] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        result.add("");
+
+        for (int i =0; i< digits.length();i++) {
+            char digit = digits.charAt(i);
+            String letters = mapping[digit -'0'];
+            List<String> temp = new ArrayList<>();
+
+            for (String c : result) {
+                for (char letter : letters.toCharArray()) {
+                    temp.add(c+letter);
+                }
+            }
+            result = temp;
+        }
+        return result;
     }
 }
