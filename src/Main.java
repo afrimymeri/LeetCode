@@ -187,6 +187,33 @@ class Solutions {
         throw new IllegalArgumentException();
     }
 
+
+    /**
+     * Given an array nums of distinct integers, return all the possible
+     * permutations. You can return the answer in any order.
+     */
+
+    public static List<List<Integer>> permute (int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack1(result, new ArrayList<>(), nums, new boolean[nums.length]);
+        return result;
+    }
+    public static void backtrack1(List<List<Integer>> result, List<Integer> temp, int[] nums, boolean[] used) {
+        if (temp.size() == nums.length){
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = 0; i < nums.length;i++) {
+            if (!used[i]) {
+                used[i] = true;
+                temp.add(nums[i]);
+                backtrack1(result,temp,nums,used);
+                used[i] = false;
+                temp.remove(temp.size()-1);
+            }
+        }
+    }
+
 }
 class ListNode{
     int val;
