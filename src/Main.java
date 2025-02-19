@@ -5,6 +5,9 @@ import java.util.List;
 public class Main{
     public static void main(String [] args) {
         System.out.println(Solutions.generateParenthesis(4));
+
+        String res = Solutions.addBinary("1001", "010");
+        System.out.println(res);
     }
 
     public static ArrayList<String> fizzbuzz(int nums[]) {
@@ -212,6 +215,24 @@ class Solutions {
                 temp.remove(temp.size()-1);
             }
         }
+    }
+
+    /**
+     * Given two binary strings a and b, return their sum as a binary string.
+     */
+    public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int i = a.length()-1;
+        int j = b.length()-1;
+        int carry = 0;
+        while (i>=0 || j>= 0 || carry > 0) {
+            int aBit = (i>=0) ? a.charAt(i--) - '0' : 0;
+            int bBit = (j>= 0 ) ? b.charAt(j--) - '0' : 0;
+            int sum = aBit+ bBit + carry;
+            sb.append(sum%2);
+            carry = sum/2;
+        }
+        return sb.reverse().toString();
     }
 
 }
