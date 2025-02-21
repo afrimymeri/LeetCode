@@ -1,6 +1,5 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main{
     public static void main(String [] args) {
@@ -233,6 +232,38 @@ class Solutions {
             carry = sum/2;
         }
         return sb.reverse().toString();
+    }
+
+    /**
+     Given a string s,
+     sort it in decreasing order based on the frequency of the characters.
+     The frequency of a character is the number of times it appears in the string.
+     Return the sorted string. If there are multiple answers, return any of them.
+     */
+
+    public static String frequencySort(String s) {
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            frequencyMap.put(c, frequencyMap.getOrDefault(c,0) + 1);
+        }
+        List<Character> characters = new ArrayList<>(frequencyMap.keySet());
+        Collections.sort(characters, (a,b) -> {
+            int freqCompare = Integer.compare(frequencyMap.get(b), frequencyMap.get(a));
+            if (freqCompare != 0) {
+                return freqCompare;
+            }else{
+                return Character.compare(b,a);
+            }
+        });
+
+        StringBuilder result = new StringBuilder();
+        for (Character c: characters) {
+            int count = frequencyMap.get(c);
+            for (int i = 0; i < count;i++) {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 
 }
