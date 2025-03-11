@@ -7,6 +7,14 @@ public class Main{
 
         String res = Solutions.addBinary("1001", "010");
         System.out.println(res);
+
+        String res1 = "funksion";
+        System.out.println(Solutions.frequencySort(res1));
+        System.out.println("----------------------------------------");
+        System.out.println(Solutions.reverseString(res1));
+        System.out.println("----------------------------------------");
+        int[] arr = {1,2,3,4,5,6,7,8,9,10};
+        Solutions.maxNumInArray(arr);
     }
 
     public static ArrayList<String> fizzbuzz(int nums[]) {
@@ -266,6 +274,73 @@ class Solutions {
         return result.toString();
     }
 
+    public static String reverseString(String str) {
+        char[] charArray = str.toCharArray();
+        int left = 0;
+        int right = str.length()-1;
+        while (left<right) {
+            char temp = charArray[left];
+            charArray[left] = charArray[right];
+            charArray[right] = temp;
+            left++;
+            right--;
+
+        }
+        return new String(charArray);
+    }
+    public static void maxNumInArray(int[] arr) {
+        int min = arr[0];
+        int max =arr[0];
+        for (int i = 0; i< arr.length; i++) {
+            if (arr[i] < max) {
+                max = arr[i];
+            }
+            if (arr[i] > min) {
+                min = arr[i];
+            }
+        }
+
+        System.out.println("Max value in array is: " + max);
+        System.out.println("Min value in array is: " + min);
+    }
+
+
+    public static int strStr(String haystack, String needle) {
+        return haystack.indexOf(needle);
+    }
+
+    public static ListNode2 mergeTwoLists(ListNode2 list1, ListNode2 list2) {
+        ListNode2 dummy = new ListNode2(-1);
+        ListNode2 current = dummy;
+
+        while(list1 != null && list2!=null) {
+            if (list1.val<=list2.val){
+                current.next = list1;
+                list1 = list1.next;
+            }else{
+                current.next = list2;
+                list2 = list2.next;
+            }
+            current = current.next;
+        }
+        if (list1 != null) {
+            current.next = list1;
+        }else if(list2!=null) {
+            current.next = list2;
+        }
+
+        return dummy.next;
+    }
+    public static void printList(ListNode2 head) {
+        ListNode2 current = head;
+        while (current != null) {
+            System.out.println(current.val + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+
 }
 class ListNode{
     int val;
@@ -274,5 +349,16 @@ class ListNode{
         this.val = val;
         this.next = null;
     }
-
+}
+class ListNode2{
+    int val;
+    ListNode2 next;
+    ListNode2(){}
+    ListNode2(int val) {
+        this.val = val;
+    }
+    ListNode2(int val, ListNode2 next) {
+        this.val = val;
+        this.next = next;
+    }
 }
